@@ -9,6 +9,7 @@ var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
 mongoose.connect(connectionString || 'mongodb://localhost/news');
 require('./models/Comments');
 require('./models/Posts');
+require('./models/Restaurants');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 

@@ -1,5 +1,5 @@
 html { 
-  background: url(../img/background.jpg) no-repeat center center fixed; 
+  background: url("http://upload.wikimedia.org/wikipedia/commons/e/e1/ARS_copper_rich_foods.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

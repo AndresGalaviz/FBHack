@@ -108,6 +108,27 @@ angular.module('feedMe', ['ui.router'])
 		$scope.code = "welwll2"
 		$scope.restaurant = restaurantProm;
 		$scope.title = "welwll"
+		$scope.order = [];
+		$scope.order.setOrder = function(item, count){
+			var ecountered = false;
+			for(var i = 0; i< order.length; i++){
+				if(item === order[i]("item")){
+					encoutnered = true;
+					order[i]("amount")=count;
+				}
+			}
+			if(!encountered){
+				order.push({amount: 1 , item: cs})
+			}
+		}
+
+
+		$scope.getSizeOfOrder = function(cs) {
+			console.log({amount: 1 , item: cs})
+			$scope.order.push({amount: 1 , item: cs})
+
+			
+		}
 }])
 .config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {

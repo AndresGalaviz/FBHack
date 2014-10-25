@@ -38,6 +38,7 @@ router.get('/posts/:post', function(req, res, next) {
 
 router.get('/init', function(req, res, next) {
   Restaurant.remove({}, function(err) { });
+  Recommendation.remove({}, function(err) { });
   var restaurants = []
   console.log("Hey andres")
   restaurants.push(new Restaurant({name:'Tacco Monster',
@@ -47,12 +48,23 @@ router.get('/init', function(req, res, next) {
                                             {itemName: 'Tacos piratas',price : 70, description:'Piratas!!!'},
                                    ] 
                                   })) 
+  
+  var rec = new Recommendation({rating: 5,
+                      comment: "My Favourite Restaurant!",
+                      restaurants: restaurants[0]._id,
+                      user: "Batman"})
+  rec.save();
+  restaurants[0].recommendation.push( rec );
+
+  rec =  new Recommendation({rating: 4,
+                      comment: "I like it, but Batman is always there =(!",
+                      restaurants: restaurants[0]._id,
+                      user: "Superman"})
+  
+  rec.save();
+  restaurants[0].recommendation.push( rec );
   restaurants[0].save()
 
-  
-
-
-  
   restaurants.push(new Restaurant({name:'Ming Sushi',
                                   menuItems:[{itemName: 'Salmon',price : 50},
                                             {itemName: 'Kappa Maki',price : 55},
@@ -112,7 +124,9 @@ router.param('restaurant', function(req, res, next, id) {
 
 
 router.get('/restaurants/:restaurant', function(req, res) {
-  res.json(req.restaurant);
+  req.restaurant.populate('recommendation', function(err, restaurant) {
+    res.json(restaurant);
+  });
 });
 
 

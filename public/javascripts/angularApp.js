@@ -107,6 +107,8 @@ angular.module('feedMe', ['ui.router'])
 	function($scope, $stateParams, restaurantProm){
 		$scope.code = "welwll2"
 		$scope.restaurant = restaurantProm;
+		$scope.recommendation = restaurantProm.recommendation;
+
 		$scope.title = "welwll"
 		$scope.order = [];
 		$scope.order.setOrder = function(cs, count){
@@ -150,10 +152,10 @@ angular.module('feedMe', ['ui.router'])
 			var size = $scope.order.getSizeOfOrder(cs);
 			if(size == 1){
 				for(var i = 0; i< $scope.order.length; i++){
-				if(cs === $scope.order[i].item){
-					$scope.order.splice(i);
+					if(cs === $scope.order[i].item){
+						$scope.order.splice(i);
+					}
 				}
-			}
 			}else if(size >1 )$scope.order.setOrder(cs, size - 1);
 
 		}

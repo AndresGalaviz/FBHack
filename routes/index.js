@@ -4,6 +4,10 @@ var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var Restaurant = mongoose.model('Restaurant');
+
+var User = mongoose.model('User');
+
+
 var Recommendation = mongoose.model('Recommendation');
 
 //POst functions:
@@ -189,6 +193,56 @@ router.post('/recommendation', function(req, res, next) {
   });
 });
 
+router.get('/signup', function(req, res) {
+    res.render('signup', { title: 'Signup' });
+});
+
+router.post('/signup', function(req, res) {
+
+  var newUser            = new User();
+
+  // set the user's local credentials
+  newUser.local.email    = req.body.email;
+  newUser.local.password = newUser.generateHash(req.body.password);
+  newUser.save(function(err, user){
+    if(err){ return next(err); }
+
+    res.json(user);
+  });
+  
+});
+
+router.get('/login', function(req, res) {
+    res.render('login', { title: 'Login' });
+});
+
+router.post('/login', function(req, res) {
+  User.findOne({ 'local.email' :  req.body.email }, function(err, user) {
+        // if there are any errors, return the error before anything else
+        if (err){
+          console.log("error");
+          return;
+        }
+            
+
+        // if no user is found, return the message
+        if (!user){
+            console.log("no user");
+            return;
+        }
+
+  // if the user is found but the password is wrong
+        if (!user.validPassword(req.body.password)){
+            console.log("invalid password");
+            return;
+        } 
+
+        console.log("successful");
+        // all is well, return successful user
+        res.json(user);
+        return;
+    });
+});
 
 
 
@@ -197,6 +251,7 @@ router.post('/recommendation', function(req, res, next) {
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
+
 
 
 

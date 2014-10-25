@@ -13,4 +13,6 @@ RestaurantSchema.methods.upvote = function(cb) {
  	this.sabe(cb);
 }
 
+
+
 mongoose.model('Restaurant', RestaurantSchema)

@@ -41,13 +41,80 @@ router.get('/init', function(req, res, next) {
   Recommendation.remove({}, function(err) { });
   var restaurants = []
   console.log("Hey andres")
+  
   restaurants.push(new Restaurant({name:'Tacco Monster',
                                    menuItems:[{itemName: 'Quesedilla',price : 50, description:'Con mucho queso'},
                                             {itemName: 'Campechanas',price : 55, description:'Me encanta'},
                                             {itemName: 'Burritos',price : 60, description:'El mejor'},
                                             {itemName: 'Tacos piratas',price : 70, description:'Piratas!!!'},
-                                   ] 
-                                  })) 
+                                            {itemName: 'Frijoles Charros',price : 40, description:'Hechele!'},
+                                            {itemName: 'Papa Asada',price : 80, description:'Con mantequilla'},
+                                            {itemName: 'Orden Familiar',price : 110, description:'Carnitas para todos'},
+                                            {itemName: 'Salchicha asada',price : 70, description:'Rellena de queso'},
+                                            {itemName: 'Soda',price : 18, description:'Bebida'},
+                                            {itemName: 'Limonada',price : 20, description:'Toma algo'},
+                                            {itemName: 'Gloria',price : 15, description:'Dulcesito'} 
+                                   ]
+                                  }))
+  restaurants[0].save()
+ 
+ 
+ 
+ 
+ 
+  restaurants.push(new Restaurant({name:'Ming Sushi',
+                                  menuItems:[{itemName: 'Salmon',price : 50, description:'Feeling fishy?'},
+                                            {itemName: 'Kappa Maki',price : 55, description:'Try new stuff!'},
+                                            {itemName: 'Kani',price : 60, description:'Classics never die'},
+                                            {itemName: 'Miso Soup',price : 70, description:'Lets add more stuff'},
+                                            {itemName: 'Cali Roll',price : 60, description:'The Favorite!'},
+                                            {itemName: 'Dragon Roll',price : 75, description:'Ancient taste'},
+                                            {itemName: 'Shrimp Roll',price : 90, description:'Who could hate this!'},                            
+                                            {itemName: 'Ice cream',price : 70, description:'Dessert, yeah why not'},
+                                            {itemName: 'Soy Rice',price : 45, description:'New plate, check it out!'},
+                                            {itemName: 'Green Tea',price : 25, description:'Be one with earth.'},
+                                   ]                              
+ 
+                                    }))
+  restaurants[1].save()
+  restaurants.push(new Restaurant({name:'Schnitzelmeister',
+                                  menuItems:[{itemName: 'Wiener Schnitzel',price : 50},
+                                            {itemName: 'Frankfurter',price : 55},
+                                            {itemName: 'Kaiserschmarn',price : 60},
+                                            {itemName: 'Gulasch',price : 70}
+                                   ]
+ 
+  }))
+  restaurants[2].save()
+ 
+  restaurants.push(new Restaurant({name:'Chiky Chicken',
+                                  menuItems:[{itemName: 'Chicken',price : 40, description:'You know this well'},
+                                            {itemName: 'Biscuit',price : 10, description:'They are cool'},
+                                            {itemName: 'Fries',price : 15, description:'Hot and salty'},
+                                            {itemName: 'Nuggets',price : 25, description:'Hating bones buddy?'},
+                                            {itemName: 'Smashed Potatoe',price : 35, description:'With a secret touch.'},
+                                            {itemName: 'Chicken Burger',price : 30, description:'Best invention, bread and chicken!'},
+                                            {itemName: 'Special Combo',price : 170, description:'3 Chickens, 3 fries, 3 sodas'},
+                                            {itemName: 'Soda',price : 15, description:'Regular or diet'},
+                                            {itemName: 'Natural Juice',price : 20, description:'Sugar free'},
+                                            {itemName: 'Bottled Water',price : 12}
+                                   ]                              
+ 
+                                    }))
+  restaurants[3].save()
+ 
+  restaurants.push(new Restaurant({name:'La Fete',
+                                  menuItems:[{itemName: 'Green Salad',price : 50, description:'Special of the House'},
+                                            {itemName: 'Panini',price : 45, description:'Eat with style'},
+                                            {itemName: 'Crepe',price : 60, description:'Sweet or salty'},
+                                            {itemName: 'Coffe',price : 25, description:'Just ask how you like it'},
+                                            {itemName: 'Warm Chocolate',price : 25, description:'Handmade'}
+                                   ]                              
+ 
+                                    }))
+  restaurants[4].save()
+
+
   
   var rec = new Recommendation({rating: 5,
                       comment: "My Favourite Restaurant!",
@@ -65,25 +132,6 @@ router.get('/init', function(req, res, next) {
   restaurants[0].recommendation.push( rec );
   restaurants[0].save()
 
-  restaurants.push(new Restaurant({name:'Ming Sushi',
-                                  menuItems:[{itemName: 'Salmon',price : 50},
-                                            {itemName: 'Kappa Maki',price : 55},
-                                            {itemName: 'Kani',price : 60},
-                                            {itemName: 'Miso Soup',price : 70},
-                                   ]                              
-
-                                    })) 
-  restaurants[1].save()
-  restaurants.push(new Restaurant({name:'Schnitzelmeister',
-                                  menuItems:[{itemName: 'Wiener Schnitzel',price : 50},
-                                            {itemName: 'Frankfurter',price : 55},
-                                            {itemName: 'Kaiserschmarn',price : 60},
-                                            {itemName: 'Gulasch',price : 70},
-                                   ]
-
-})) 
-  restaurants[2].save()
-  
   res.json(restaurants);
 
 });

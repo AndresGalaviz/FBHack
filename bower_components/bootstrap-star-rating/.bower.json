@@ -1,0 +1,42 @@
+{
+  "name": "bootstrap-star-rating",
+  "version": "2.6.0",
+  "homepage": "https://github.com/kartik-v/bootstrap-star-rating",
+  "authors": [
+    "Kartik Visweswaran <kartikv2@gmail.com>"
+  ],
+  "description": "A simple yet powerful JQuery star rating plugin for Bootstrap.",
+  "main": [
+    "./css/star-rating.min.css",
+    "./js/star-rating.min.js"
+  ],
+  "keywords": [
+    "bootstrap",
+    "star",
+    "rating"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0",
+    "bootstrap": ">= 3.0.0"
+  },
+  "license": "BSD-3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "composer.json",
+    "examples",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "2.6.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.6.0",
+    "commit": "5f9dedc14fbf13477ea72322b7b608676b046cbc"
+  },
+  "_source": "git://github.com/kartik-v/bootstrap-star-rating.git",
+  "_target": "~2.6.0",
+  "_originalSource": "bootstrap-star-rating",
+  "_direct": true
+}

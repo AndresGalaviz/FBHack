@@ -1,6 +1,15 @@
+html { 
+  background: url(../img/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 body {
-  padding: 50px;
+  opacity: 0.97;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
 

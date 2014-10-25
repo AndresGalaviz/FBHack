@@ -45,7 +45,7 @@ router.get('/init', function(req, res, next) {
   Recommendation.remove({}, function(err) { });
   var restaurants = []
   console.log("Hey andres")
-  
+ 
   restaurants.push(new Restaurant({name:'Tacco Monster',
                                    menuItems:[{itemName: 'Quesedilla',price : 50, description:'Con mucho queso'},
                                             {itemName: 'Campechanas',price : 55, description:'Me encanta'},
@@ -57,7 +57,7 @@ router.get('/init', function(req, res, next) {
                                             {itemName: 'Salchicha asada',price : 70, description:'Rellena de queso'},
                                             {itemName: 'Soda',price : 18, description:'Bebida'},
                                             {itemName: 'Limonada',price : 20, description:'Toma algo'},
-                                            {itemName: 'Gloria',price : 15, description:'Dulcesito'} 
+                                            {itemName: 'Gloria',price : 15, description:'Dulcesito'}
                                    ]
                                   }))
   restaurants[0].save()
@@ -117,27 +117,102 @@ router.get('/init', function(req, res, next) {
  
                                     }))
   restaurants[4].save()
-
-
-  
+ 
+ 
+ 
   var rec = new Recommendation({rating: 5,
                       comment: "My Favourite Restaurant!",
                       restaurants: restaurants[0]._id,
                       user: "Batman"})
   rec.save();
   restaurants[0].recommendation.push( rec );
-
+ 
   rec =  new Recommendation({rating: 4,
                       comment: "I like it, but Batman is always there =(!",
                       restaurants: restaurants[0]._id,
                       user: "Superman"})
-  
+ 
+  rec.save();
+  restaurants[0].recommendation.push( rec );
+ 
+  rec =  new Recommendation({rating: 0,
+                      comment: "You call that a tortilla!",
+                      restaurants: restaurants[0]._id,
+                      user: "HaterDude"})
+ 
   rec.save();
   restaurants[0].recommendation.push( rec );
   restaurants[0].save()
-
+ 
+ 
+rec = new Recommendation({rating: 4,
+                      comment: "I was feeling Fishy after this!",
+                      restaurants: restaurants[1]._id,
+                      user: "Fisherman"})
+  rec.save();
+  restaurants[1].recommendation.push( rec );
+ 
+  rec =  new Recommendation({rating: 3,
+                      comment: "It was good, but the ancient taste was expensive!",
+                      restaurants: restaurants[1]._id,
+                      user: "Dijkstra the Greedy"})
+ 
+  rec.save();
+  restaurants[1].recommendation.push( rec );
+ 
+  rec =  new Recommendation({rating: 4,
+                      comment: "Cali roll is the best!",
+                      restaurants: restaurants[1]._id,
+                      user: "John"})
+ 
+  rec.save();
+  restaurants[1].recommendation.push( rec );
+  restaurants[1].save()
+ 
+ 
+  rec = new Recommendation({rating: 2,
+                      comment: "Stop hurting the chicken! Eat green!",
+                      restaurants: restaurants[3]._id,
+                      user: "Daughter Nature"})
+  rec.save();
+  restaurants[3].recommendation.push( rec );
+ 
+  rec =  new Recommendation({rating: 5,
+                      comment: "Stop hurting plants! Buy Special Combo",
+                      restaurants: restaurants[3]._id,
+                      user: "Jeremy Cubicle"})
+ 
+  rec.save();
+  restaurants[3].recommendation.push( rec );
+ 
+  rec =  new Recommendation({rating: 4,
+                      comment: "Fast service, that was nice",
+                      restaurants: restaurants[3]._id,
+                      user: "Flash"})
+ 
+  rec.save();
+  restaurants[3].recommendation.push( rec );
+  restaurants[3].save()
+ 
+ 
+  rec = new Recommendation({rating: 5,
+                      comment: "So romantic! #inlove #yumyum #CrepeRules #Fancy",
+                      restaurants: restaurants[4]._id,
+                      user: "Emily"})
+  rec.save();
+  restaurants[4].recommendation.push( rec );
+ 
+  rec =  new Recommendation({rating: 5,
+                      comment: "It is affordable and girls think its fancy, win",
+                      restaurants: restaurants[4]._id,
+                      user: "Emily's Cutie-Pie"})
+ 
+  rec.save();
+  restaurants[4].recommendation.push( rec );
+  restaurants[4].save()
+ 
   res.json(restaurants);
-
+ 
 });
 
 

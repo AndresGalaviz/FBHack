@@ -10,7 +10,11 @@ mongoose.connect(connectionString || 'mongodb://localhost/news');
 require('./models/Comments');
 require('./models/Posts');
 require('./models/Restaurants');
+
 require('./models/Users');
+
+require('./models/Recommendation');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 

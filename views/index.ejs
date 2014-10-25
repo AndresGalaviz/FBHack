@@ -20,180 +20,114 @@
 
 
 
+		<ui-view></ui-view>
+		
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<ui-view></ui-view>
-				
+
+			<div class="page-header col-xs-6 col-md-12 text-center">
+				<h1><span class="fa fa-lock"></span> Feedme Authentication</h1>
+
+				<p>Login or Register with:</p>
+
+				<a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+
+				</div>
 			</div>
 		</div>
 		
-		<script type="text/ng-template" id="/home.html">
-			
-		</script>
-		<div class="container">
-
-		<div class="jumbotron text-center">
-			<h1><span class="fa fa-lock"></span> Feedme Authentication</h1>
-
-			<p>Login or Register with:</p>
-
-			<a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-
-		</div>
 
 		<script type="text/ng-template" id="/restaurants.html">
-		
-		<div class="page-header">
-
-			<center>
-
-				<h1 >Feed Me</h1>
-			</center>
-			<br>
-			<input type="text" placeholder="Search for restaurants" class="form-control" ng-model="query">
+		<div class="container">
+			<div class="page-header text-center">
 			
-			<!--<div ng-repeat="post in posts | orderBy:'-upvotes' | filter:query">
-					<div ng-show="query.length && post.title.indexOf(query)!=-1">
-						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">{{post.upvotes}}
-						</span>
-						
-						<span style="font-size:20px; margin-left:10px;">
-							<a  href="{{post.link}}">
-											{{post.title}}
-							</a>
-		
-							<span>
-								<a href="#/posts/{{$index}}">Comments</a>
+					<h1 >Feed Me</h1>
+				<br>
+				<input type="text" placeholder="Search for restaurants" class="form-control" ng-model="query">
+			</div>	
+				
+			<div class="col-md-12 text-center" >
+				<div ng-repeat="restaurant in restaurants | orderBy:'-upvotes' | filter:query">
+					<div ng-show=" !query || restaurant.name.indexOf(query)!=-1">
+							<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(restaurant)">{{restaurant.upvotes}}
 							</span>
-						</span>
-					</div>
-			</div>-->
-
-			<div ng-repeat="restaurant in restaurants | orderBy:'-upvotes' | filter:query">
-				<div ng-show=" !query || restaurant.name.indexOf(query)!=-1">
-						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(restaurant)">{{restaurant.upvotes}}
-						</span>
-						
-						<span style="font-size:20px; margin-left:10px;">
-							<a  href="#/restaurants/{{restaurant._id}}">
-											{{restaurant.name}}
-							</a>
-		
-							<span>
-								<a href="#/restaurants/{{$index}}">Comments</a>
+							
+							<span style="font-size:20px; margin-left:10px;">
+								<a  href="#/restaurants/{{restaurant._id}}">
+												{{restaurant.name}}
+								</a>
+			
+								<span>
+									<a href="#/restaurants/{{$index}}">Comments</a>
+								</span>
 							</span>
-						</span>
-					</div>
+						</div>
+				</div>
 			</div>
-
-
-
-
-			<!--<form ng-submit="addPost()" style="margin-top:30px;">
-							<h3>Add a new post</h3>
-							<div class="form-group">
-											<input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
-							</div>
-							<div class="form-group">
-											<input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
-							</div>
-							<button type="submit" class="btn btn-primary">Post</button>
-			</form> -->
-
-			<form ng-submit="addRestaurant()" style="margin-top:30px;">
-							<h3>Add a new restaurant</h3>
-							<div class="form-group">
-											<input type="text" class="form-control" placeholder="Name" ng-model="name"></input>
-							</div>
-							<div class="form-group">
-											<input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
-							</div>
-							<button type="submit" class="btn btn-primary">Add</button>
-			</form>
-
 
 		</div>
 		<!-- rest of template -->
 		
 		</script>
 		
-		<script type="text/ng-template" id="/posts.html">
-		<div class="page-header">
-							<h3>
-							<a ng-show="post.link" href="{{post.link}}">
-												{{post.title}}
-							</a>
-							<span ng-hide="post.link">
-							{{post.title}}
-							</span>
-							</h3>
-		</div>
-		<div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
-							<span class="glyphicon glyphicon-thumbs-up"
-							ng-click="incrementUpvotes(comment)"></span>
-							{{comment.upvotes}} - by {{comment.author}}
-							<span style="font-size:20px; margin-left:10px;">
-							{{comment.body}}
-							</span>
-							<span>
-						
-						</span>
-		</div>
-		</script>
+		
 
 		<script type="text/ng-template" id="/oneRestaurant.html">
-		<h1> well </h1>
+		
+		<div class="row">
+			<div class="page-header col-xs-6 col-md-12 text-center">
+				<h1><span class="fa fa-lock"></span> {{restaurant.name}}</h1>
 
-		<div class="page-header">
-				<h3>
-				<a ng-show="restaurant.link" href="{{restaurant.link}}">
-									{{restaurant.name}}
-				</a>
-				<span ng-hide="restaurant.link">
-				{{restaurant.name}}
-				</span>
-				</h3>
+			</div>
 		</div>
-		<div ng-repeat="item in restaurant.menuItems | orderBy:'-upvotes'">
-				<div ng-click="takeOrder(item)">
-				
-					<span style="font-size:20px; margin-left:10px;">
-							{{item.itemName}} - {{item.price}} $
-					</span> <br>
+		<div class="row-fluid">
+  			<div class="col-md-4">
+				<div ng-repeat="rec in recommendation | orderBy:'-rating'">
 					<span style="font-size:10px; margin-left:10px;">
-							{{item.description}}
+							{{rec.rating}} {{rec.user}} 
+					</span> <br>				
+					<span style="font-size:10px; margin-left:10px;">
+							{{rec.comment}} 
 					</span>
 				</div>
-		</div>
+			</div>
 
-		<h1> Ordered: </h1>
-		<div ng-repeat="element in order">
-				<span style="font-size:20px; margin-left:10px;">
-						{{}}  {{element.item.itemName}} - {{element.item.price}} $
-				</span> <br>
-				
+  			<div class="col-md-4 txt-center">
+				<div ng-repeat="item in restaurant.menuItems | orderBy:'-upvotes'">
+						<div ng-click="order.addOrder(item)">
+						
+							<span style="font-size:20px; margin-left:10px;">
+									{{item.itemName}} - {{item.price}} $
+							</span> <br>
+							<span style="font-size:10px; margin-left:10px;">
+									{{item.description}}
+							</span>
+						</div>
+				</div>
+			</div>
+			
+			<div class="col-md-4" ng-show="sum()">
+				<h1> Ordered: </h1>
+				<div ng-repeat="element in order">
+						<span class="glyphicon glyphicon-minus"
+									ng-click="order.removeOrder(element.item)"></span>
+						<span class="glyphicon glyphicon-plus"
+									ng-click="order.addOrder(element.item)"></span>
+						<span style="font-size:20px; margin-left:10px;">
+								{{element.amount}} {{element.item.itemName}} - {{element.item.price}} $
+						</span> <br>				
+				</div>
+				<div> Sum = {{sum()}} </div>
+			</div>
 		</div>
-
 		</script>
 
 
-		<script type="text/ng-template" id="/posts.html">
 
-		  <!-- post template -->
 
-		  <form ng-submit="addComment()"
-		    style="margin-top:30px;">
-		    <h3>Add a new comment</h3>
 
-		    <div class="form-group">
-		      <input type="text"
-		      class="form-control"
-		      placeholder="Comment"
-		      ng-model="body"></input>
-		    </div>
-		    <button type="submit" class="btn btn-primary">Post</button>
-		  </form>
-		</script>
+
+
+
 		<script type="text/ng-template" id="/oneRestaurant12.html">
 
 		  <!-- post template -->
@@ -211,5 +145,7 @@
 		    <button type="submit" class="btn btn-primary">Post</button>
 		  </form>
 		</script>
+
+
 	</body>
 </html>

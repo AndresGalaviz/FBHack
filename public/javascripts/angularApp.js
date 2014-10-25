@@ -107,28 +107,66 @@ angular.module('feedMe', ['ui.router'])
 	function($scope, $stateParams, restaurantProm){
 		$scope.code = "welwll2"
 		$scope.restaurant = restaurantProm;
+		$scope.recommendation = restaurantProm.recommendation;
+
 		$scope.title = "welwll"
 		$scope.order = [];
-		$scope.order.setOrder = function(item, count){
+		$scope.order.setOrder = function(cs, count){
+			console.log(cs +", count =" +count)
 			var ecountered = false;
-			for(var i = 0; i< order.length; i++){
-				if(item === order[i]("item")){
-					encoutnered = true;
-					order[i]("amount")=count;
+			for(var i = 0; i< $scope.order.length; i++){
+				if(cs === $scope.order[i].item){
+					ecountered = true;
+					$scope.order[i].amount=count;
 				}
 			}
-			if(!encountered){
-				order.push({amount: 1 , item: cs})
+			if(!ecountered){
+				console.log("not encountered")
+			
+				$scope.order.push({amount: 1 , item: cs})
+			}
+		}
+		
+		$scope.order.getSizeOfOrder = function(cs) {
+			console.log("cs")
+			var ecountered = false;
+			for(var i = 0; i< $scope.order.length; i++){
+				if(cs === $scope.order[i].item){
+					console.log("true")
+					ecountered = true;
+					return $scope.order[i].amount;
+				}
+			}
+			if(!ecountered){
+				console.log("not true")
+				return 0;
 			}
 		}
 
-
-		$scope.getSizeOfOrder = function(cs) {
-			console.log({amount: 1 , item: cs})
-			$scope.order.push({amount: 1 , item: cs})
-
-			
+		$scope.order.addOrder = function(cs){
+			var size = $scope.order.getSizeOfOrder(cs);
+			$scope.order.setOrder(cs, size +1);			
 		}
+
+		$scope.order.removeOrder = function(cs){
+			var size = $scope.order.getSizeOfOrder(cs);
+			if(size == 1){
+				for(var i = 0; i< $scope.order.length; i++){
+					if(cs === $scope.order[i].item){
+						$scope.order.splice(i);
+					}
+				}
+			}else if(size >1 )$scope.order.setOrder(cs, size - 1);
+
+		}
+
+		$scope.sum = function(){
+			var add = 0;
+			for(var i = 0; i< $scope.order.length; i++){
+				add += $scope.order[i].item.price*$scope.order[i].amount;
+			}
+			return add;
+		} 
 }])
 .config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {

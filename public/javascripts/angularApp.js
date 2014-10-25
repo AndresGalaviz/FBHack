@@ -1,4 +1,4 @@
-angular.module('galavizNews', ['ui.router'])
+angular.module('feedMe', ['ui.router'])
 .factory('posts', [function(){
   var o = {
   	posts: []

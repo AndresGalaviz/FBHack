@@ -1,13 +1,13 @@
 <html>
 	<head>
-		<title>Galaviz News!</title>
+		<title>FeedMe!</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 		<script src="/javascripts/angularApp.js"></script>
 		<style> .glyphicon-thumbs-up { cursor:pointer } </style>
 	</head>
-	<body ng-app="galavizNews">
+	<body ng-app="feedMe">
 	<script>
 	  window.fbAsyncInit = function() {
 	    FB.init({
@@ -39,7 +39,7 @@
 		</div>
 		<script type="text/ng-template" id="/home.html">
 		<div class="page-header">
-								<h1>Galaviz News</h1>
+								<h1>Feed Me</h1>
 								<div ng-repeat="post in posts | orderBy:'-upvotes'">
 											<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
 											{{post.upvotes}}

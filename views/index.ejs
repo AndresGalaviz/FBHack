@@ -52,10 +52,8 @@
 
 		<script type="text/ng-template" id="/restaurants.html">
 		<div class="container">
-			<div class="page-header text-center">
-			
-					<h1 >Feed Me</h1>
-				<br>
+			<div class="page-header col-xs-6 col-md-12 text-center">
+				<h1><span class="fa fa-lock"></span> Feedme</h1>
 				<input type="text" placeholder="Search for restaurants" class="form-control" ng-model="query">
 			</div>	
 				
@@ -90,19 +88,22 @@
 		<div class="row">
 			<div class="page-header col-xs-6 col-md-12 text-center">
 				<h1><span class="fa fa-lock"></span> {{restaurant.name}}</h1>
-
+				<input type="text" placeholder="Search for food" class="form-control" ng-model="queryfood">
 			</div>
+			
 		</div>
 		<div class="row-fluid">
   			<div class="col-md-4">
   				<div style="font-size:15px; margin-left:10px;"> Recommendations </div> <br>
-				<div ng-repeat="rec in recommendation | orderBy:'-rating'">
+				<div ng-repeat="rec in recommendation | orderBy:'-rating' | filter:queryfood">
+				<div ng-show=" !query || restaurant.name.indexOf(query)!=-1">
 					<span style="font-size:15px; margin-left:10px;">
 							{{rec.rating}} {{rec.user}} 
 					</span> <br>				
 					<span style="font-size:15px; margin-left:10px;">
 							{{rec.comment}} 
 					</span>
+					</div>
 				</div>
 			</div>
 

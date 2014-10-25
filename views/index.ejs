@@ -39,32 +39,38 @@
 		</div>
 		<script type="text/ng-template" id="/home.html">
 		<div class="page-header">
-								<h1>Feed Me</h1>
-								<div ng-repeat="post in posts | orderBy:'-upvotes'">
-											<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
-											{{post.upvotes}}
-											<span style="font-size:20px; margin-left:10px;">
-											<a ng-show="post.link" href="{{post.link}}">
-															{{post.title}}
-											</a>
-											<span ng-hide="post.link">
-											{{post.title}}
-											</span>
-																									<span>
-						<a href="#/posts/{{$index}}">Comments</a>
+			<center>
+				<h1 >Feed Me</h1>
+			</center>
+			<br>
+			<input type="text" placeholder="Search for restaurants" class="form-control" ng-model="query">
+			
+			<div ng-repeat="post in posts | orderBy:'-upvotes' | filter:query">
+				<div ng-show="query.length && post.title.indexOf(query)!=-1">
+						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">{{post.upvotes}}
 						</span>
-											</span>
+						
+						<span style="font-size:20px; margin-left:10px;">
+							<a  href="{{post.link}}">
+											{{post.title}}
+							</a>
+		
+							<span>
+								<a href="#/posts/{{$index}}">Comments</a>
+							</span>
+						</span>
+					</div>
+			</div>
+			<form ng-submit="addPost()" style="margin-top:30px;">
+							<h3>Add a new post</h3>
+							<div class="form-group">
+											<input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
 							</div>
-							<form ng-submit="addPost()" style="margin-top:30px;">
-											<h3>Add a new post</h3>
-											<div class="form-group">
-															<input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
-											</div>
-											<div class="form-group">
-															<input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
-											</div>
-											<button type="submit" class="btn btn-primary">Post</button>
-							</form>
+							<div class="form-group">
+											<input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+							</div>
+							<button type="submit" class="btn btn-primary">Post</button>
+			</form>
 		</div>
 		<!-- rest of template -->
 		</script>

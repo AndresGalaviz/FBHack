@@ -93,19 +93,33 @@
 			</div>
 
   			<div class="col-md-4 txt-center">
-				<div ng-repeat="item in restaurant.menuItems | orderBy:'-upvotes'">
-						<div ng-click="order.addOrder(item)">
+				<table class="table table-hover table-bordered">
+					<tr ng-repeat="item in restaurant.menuItems | orderBy:'-upvotes'">
+						<td ng-click="order.addOrder(item)" >
+							<span class="glyphicon glyphicon-plus"
+									></span>
+						</td>
+						<td>
+							<div ng-click="order.addOrder(item)">
 						
-							<span style="font-size:20px; margin-left:10px;">
-									{{item.itemName}} - {{item.price}} $
-							</span> <br>
-							<span style="font-size:10px; margin-left:10px;">
-									{{item.description}}
-							</span>
-						</div>
-				</div>
+								<span style="font-size:20px; margin-left:10px;">
+										{{item.itemName}} - {{item.price}} $
+								</span> <br>
+								<span style="font-size:10px; margin-left:10px;">
+										{{item.description}}
+								</span>
+							</div>
+						</td>
+							
+					</tr>
+				</table>
 			</div>
 			
+
+
+
+
+
 			<div class="col-md-4" ng-show="sum()">
 				<div> Ordered: </div>
 				<div ng-repeat="element in order">

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>FeedMe!</title>
@@ -5,16 +6,35 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 		<script src="/javascripts/angularApp.js"></script>
+		<link href="/stylesheets/style.css" rel="stylesheet">
 		<style> .glyphicon-thumbs-up { cursor:pointer } </style>
 	</head>
 	<body ng-app="feedMe">
-	<div
-	  class="fb-like"
-	  data-share="true"
-	  data-width="450"
-	  data-show-faces="true">
+		<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '372131526283321',
+	      xfbml      : true,
+	      version    : 'v2.1'
+	    });
+	  };
+
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "//connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+
+
+	</script>
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
+
+	<div class="pull-right">
+		<fb:login-button max-rows="1" 
+		size="large" data-auto-logout-link="true" ></fb:login-button>
 	</div>
-	
 
 
 
@@ -25,13 +45,7 @@
 		<div class="row">
 
 			<div class="page-header col-xs-6 col-md-12 text-center">
-				<h1><span class="fa fa-lock"></span> Feedme Authentication</h1>
 
-				<p>Login or Register with:</p>
-
-				<a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-
-				</div>
 			</div>
 		</div>
 		

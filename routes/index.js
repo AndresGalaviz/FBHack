@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var Restaurant = mongoose.model('Restaurant');
+var User = mongoose.model('User');
 
 
 //POst functions:
@@ -130,7 +131,7 @@ router.get('/restaurants', function(req, res, next) {
 });
 
 
-router.post('/reastaurants', function(req, res, next) {
+router.post('/restaurants', function(req, res, next) {
   var restaurant = new Restaurant(req.body);
   console.log(req.body + ', '+ req.body.title)
   restaurant.save(function(err, restaurant){
@@ -156,6 +157,56 @@ router.get('/restaurants/:restaurant', function(req, res) {
   res.json(req.restaurant);
 });
 
+router.get('/signup', function(req, res) {
+    res.render('signup', { title: 'Signup' });
+});
+
+router.post('/signup', function(req, res) {
+
+  var newUser            = new User();
+
+  // set the user's local credentials
+  newUser.local.email    = req.body.email;
+  newUser.local.password = newUser.generateHash(req.body.password);
+  newUser.save(function(err, user){
+    if(err){ return next(err); }
+
+    res.json(user);
+  });
+  
+});
+
+router.get('/login', function(req, res) {
+    res.render('login', { title: 'Login' });
+});
+
+router.post('/login', function(req, res) {
+  User.findOne({ 'local.email' :  req.body.email }, function(err, user) {
+        // if there are any errors, return the error before anything else
+        if (err){
+          console.log("error");
+          return;
+        }
+            
+
+        // if no user is found, return the message
+        if (!user){
+            console.log("no user");
+            return;
+        }
+
+  // if the user is found but the password is wrong
+        if (!user.validPassword(req.body.password)){
+            console.log("invalid password");
+            return;
+        } 
+
+        console.log("successful");
+        // all is well, return successful user
+        res.json(user);
+        return;
+    });
+});
 
 
 
@@ -164,6 +215,7 @@ router.get('/restaurants/:restaurant', function(req, res) {
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
+
 
 
 

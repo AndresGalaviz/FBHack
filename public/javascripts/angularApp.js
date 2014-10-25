@@ -6,9 +6,15 @@ angular.module('feedMe', ['ui.router'])
   return o;
 }])
 .factory('restaurants', ['$http', function($http){
-  var o = {
-  	restaurants: []
-  };
+  	var o = {
+  		restaurants: []
+  	};
+
+  	o.get = function(id) {
+  		return $http.get('/restaurants/' + id).then(function(res){
+   			 return res.data;
+  		});
+	};
 
 	o.getAll = function() {
     return $http.get('/restaurants').success(function(data){
@@ -94,6 +100,14 @@ angular.module('feedMe', ['ui.router'])
 	function($scope, $stateParams, posts){
 
 		$scope.post = posts.posts[$stateParams.id];
+}]).controller('OneRestaurantCtrl', [
+	'$scope',
+	'$stateParams',
+	'restaurantProm',
+	function($scope, $stateParams, restaurantProm){
+		$scope.code = "welwll2"
+		$scope.restaurant = restaurantProm;
+		$scope.title = "welwll"
 }])
 .config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
@@ -112,10 +126,15 @@ angular.module('feedMe', ['ui.router'])
 				url: '/restaurants',
 				templateUrl: '/restaurants.html',
 				controller: 'RestaurantsCtrl'
-			}).state('restaurant', {
+			}).state('oneRestaurant', {
+				resolve: {
+ 					restaurantProm: ['$stateParams', 'restaurants', function($stateParams, restaurants) {
+    					return restaurants.get($stateParams.id);
+  					}]
+				},
 				url: '/restaurants/{id}',
-				templateUrl: '/restaurant.html',
-				controller: 'RestaurantCtrl'
+				templateUrl: '/oneRestaurant.html',
+				controller: 'OneRestaurantCtrl'
 			})
 			.state('posts', {
 				url:'/posts/{id}',

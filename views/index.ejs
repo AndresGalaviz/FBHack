@@ -83,7 +83,7 @@
 						</span>
 						
 						<span style="font-size:20px; margin-left:10px;">
-							<a  href="{{restaurant._id}}">
+							<a  href="#/restaurants/{{restaurant._id}}">
 											{{restaurant.name}}
 							</a>
 		
@@ -149,27 +149,29 @@
 		</div>
 		</script>
 
-		<script type="text/ng-template" id="/rest1.html">
+		<script type="text/ng-template" id="/oneRestaurant.html">
+		<h1> well </h1>
+
 		<div class="page-header">
-							<h3>
-							<a ng-show="restaurant.link" href="{{restaurant.link}}">
-												{{restaurant.name}}
-							</a>
-							<span ng-hide="restaurant.link">
-							{{restaurant.name}}
-							</span>
-							</h3>
+				<h3>
+				<a ng-show="restaurant.link" href="{{restaurant.link}}">
+									{{restaurant.name}}
+				</a>
+				<span ng-hide="restaurant.link">
+				{{restaurant.name}}
+				</span>
+				</h3>
 		</div>
-		<div ng-repeat="comment in restaurant.comments | orderBy:'-upvotes'">
-							<span class="glyphicon glyphicon-thumbs-up"
-							ng-click="incrementUpvotes(comment)"></span>
-							{{comment.upvotes}} - by {{comment.author}}
-							<span style="font-size:20px; margin-left:10px;">
-							{{comment.body}}
-							</span>
-							<span>
-						
-						</span>
+		<div ng-repeat="item in restaurant.menuItems | orderBy:'-upvotes'">
+				<div ng-click="incrementUpvotes(restaurant)">
+				
+					<span style="font-size:20px; margin-left:10px;">
+							{{item.itemName}} - {{item.price}} $
+					</span> <br>
+					<span style="font-size:10px; margin-left:10px;">
+							{{item.description}}
+					</span>
+				</div>
 		</div>
 		</script>
 
@@ -191,7 +193,7 @@
 		    <button type="submit" class="btn btn-primary">Post</button>
 		  </form>
 		</script>
-		<script type="text/ng-template" id="/restaurantsasd.html">
+		<script type="text/ng-template" id="/oneRestaurant12.html">
 
 		  <!-- post template -->
 

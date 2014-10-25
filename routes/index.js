@@ -85,15 +85,37 @@ router.get('/posts/:post', function(req, res, next) {
 
 
 router.get('/init', function(req, res, next) {
-  Restaurant.remove({}, function(err) { 
-  	 console.log('collection removed') 
-  });
-  var restaurant;
-  for(var i=0; i<10; i++){
-  	restaurant = new Restaurant({name:'restaurant'+i})
-  	restaurant.save()
-  }
-  res.json(restaurant);
+  Restaurant.remove({}, function(err) { });
+  var restaurants = []
+  console.log("Hey andres")
+  restaurants.push(new Restaurant({name:'Tacco Monster',
+                                   menuItems:[{itemName: 'Quesedilla',price : 50, description:'Con mucho queso'},
+                                            {itemName: 'Campechanas',price : 55, description:'Me encanta'},
+                                            {itemName: 'Burritos',price : 60, description:'El mejor'},
+                                            {itemName: 'Tacos piratas',price : 70, description:'Piratas!!!'},
+                                   ] 
+                                  })) 
+  restaurants[0].save()
+  restaurants.push(new Restaurant({name:'Ming Sushi',
+                                  menuItems:[{itemName: 'Salmon',price : 50},
+                                            {itemName: 'Kappa Maki',price : 55},
+                                            {itemName: 'Kani',price : 60},
+                                            {itemName: 'Miso Soup',price : 70},
+                                   ]                              
+
+                                    })) 
+  restaurants[1].save()
+  restaurants.push(new Restaurant({name:'Schnitzelmeister',
+                                  menuItems:[{itemName: 'Wiener Schnitzel',price : 50},
+                                            {itemName: 'Frankfurter',price : 55},
+                                            {itemName: 'Kaiserschmarn',price : 60},
+                                            {itemName: 'Gulasch',price : 70},
+                                   ]
+
+})) 
+  restaurants[2].save()
+  
+  res.json(restaurants);
 
 });
 
@@ -120,12 +142,10 @@ router.post('/reastaurants', function(req, res, next) {
 
 
 router.param('restaurant', function(req, res, next, id) {
-  var query = Restaurants.findById(id);
-
+  var query = Restaurant.findById(id);
   query.exec(function (err, restaurant){
     if (err) { return next(err); }
     if (!restaurant) { return next(new Error("can't find restaurant")); }
-
     req.restaurant = restaurant;
     return next();
   });

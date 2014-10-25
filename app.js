@@ -4,10 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var mongoose = require('mongoose'); 
-// mongoose.connect('mongodb://localhost/news');
-// require('./models/Comments');
-// require('./models/Posts');
+var mongoose = require('mongoose'); 
+var connectID ='mongodb://MongoLab-9:ID2l8jOB8y8zw_wwYG0fjY4iOrfA0vL3gWcDQrNtnIo-@ds031108.mongolab.com:31108/MongoLab-9';
+mongoose.connect(connectID || 'mongodb://localhost/news');
+require('./models/Comments');
+require('./models/Posts');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 

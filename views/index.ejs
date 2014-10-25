@@ -34,13 +34,25 @@
 	  data-width="450"
 	  data-show-faces="true">
 	</div>
+	
+
+
+
+
+
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<ui-view></ui-view>
 				
 			</div>
 		</div>
+		
 		<script type="text/ng-template" id="/home.html">
+			<h1> well </h1>
+		</script>
+
+		<script type="text/ng-template" id="/restaurants.html">
+		
 		<div class="page-header">
 			<center>
 				<h1 >Feed Me</h1>
@@ -48,8 +60,8 @@
 			<br>
 			<input type="text" placeholder="Search for restaurants" class="form-control" ng-model="query">
 			
-			<div ng-repeat="post in posts | orderBy:'-upvotes' | filter:query">
-				<div ng-show="query.length && post.title.indexOf(query)!=-1">
+			<!--<div ng-repeat="post in posts | orderBy:'-upvotes' | filter:query">
+					<div ng-show="query.length && post.title.indexOf(query)!=-1">
 						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">{{post.upvotes}}
 						</span>
 						
@@ -63,8 +75,29 @@
 							</span>
 						</span>
 					</div>
+			</div>-->
+
+			<div ng-repeat="restaurant in restaurants | orderBy:'-upvotes' | filter:query">
+				<div ng-show=" !query || restaurant.name.indexOf(query)!=-1">
+						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(restaurant)">{{restaurant.upvotes}}
+						</span>
+						
+						<span style="font-size:20px; margin-left:10px;">
+							<a  href="{{restaurant._id}}">
+											{{restaurant.name}}
+							</a>
+		
+							<span>
+								<a href="#/restaurants/{{$index}}">Comments</a>
+							</span>
+						</span>
+					</div>
 			</div>
-			<form ng-submit="addPost()" style="margin-top:30px;">
+
+
+
+
+			<!--<form ng-submit="addPost()" style="margin-top:30px;">
 							<h3>Add a new post</h3>
 							<div class="form-group">
 											<input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
@@ -73,9 +106,23 @@
 											<input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
 							</div>
 							<button type="submit" class="btn btn-primary">Post</button>
+			</form> -->
+
+			<form ng-submit="addRestaurant()" style="margin-top:30px;">
+							<h3>Add a new restaurant</h3>
+							<div class="form-group">
+											<input type="text" class="form-control" placeholder="Name" ng-model="name"></input>
+							</div>
+							<div class="form-group">
+											<input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+							</div>
+							<button type="submit" class="btn btn-primary">Add</button>
 			</form>
+
+
 		</div>
 		<!-- rest of template -->
+		
 		</script>
 		
 		<script type="text/ng-template" id="/posts.html">
@@ -101,7 +148,50 @@
 						</span>
 		</div>
 		</script>
+
+		<script type="text/ng-template" id="/rest1.html">
+		<div class="page-header">
+							<h3>
+							<a ng-show="restaurant.link" href="{{restaurant.link}}">
+												{{restaurant.name}}
+							</a>
+							<span ng-hide="restaurant.link">
+							{{restaurant.name}}
+							</span>
+							</h3>
+		</div>
+		<div ng-repeat="comment in restaurant.comments | orderBy:'-upvotes'">
+							<span class="glyphicon glyphicon-thumbs-up"
+							ng-click="incrementUpvotes(comment)"></span>
+							{{comment.upvotes}} - by {{comment.author}}
+							<span style="font-size:20px; margin-left:10px;">
+							{{comment.body}}
+							</span>
+							<span>
+						
+						</span>
+		</div>
+		</script>
+
+
 		<script type="text/ng-template" id="/posts.html">
+
+		  <!-- post template -->
+
+		  <form ng-submit="addComment()"
+		    style="margin-top:30px;">
+		    <h3>Add a new comment</h3>
+
+		    <div class="form-group">
+		      <input type="text"
+		      class="form-control"
+		      placeholder="Comment"
+		      ng-model="body"></input>
+		    </div>
+		    <button type="submit" class="btn btn-primary">Post</button>
+		  </form>
+		</script>
+		<script type="text/ng-template" id="/restaurantsasd.html">
 
 		  <!-- post template -->
 

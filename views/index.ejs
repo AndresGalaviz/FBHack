@@ -163,7 +163,7 @@
 				</h3>
 		</div>
 		<div ng-repeat="item in restaurant.menuItems | orderBy:'-upvotes'">
-				<div ng-click="takeOrder(item)">
+				<div ng-click="order.addOrder(item)">
 				
 					<span style="font-size:20px; margin-left:10px;">
 							{{item.itemName}} - {{item.price}} $
@@ -176,32 +176,18 @@
 
 		<h1> Ordered: </h1>
 		<div ng-repeat="element in order">
+				<span class="glyphicon glyphicon-minus"
+							ng-click="order.removeOrder(element.item)"></span>
+				<span class="glyphicon glyphicon-plus"
+							ng-click="order.addOrder(element.item)"></span>
 				<span style="font-size:20px; margin-left:10px;">
-						{{}}  {{element.item.itemName}} - {{element.item.price}} $
-				</span> <br>
-				
+						{{element.amount}} {{element.item.itemName}} - {{element.item.price}} $
+				</span> <br>				
 		</div>
-
+		<div ng-show="sum()" > Sum = {{sum()}} </div>
 		</script>
 
 
-		<script type="text/ng-template" id="/posts.html">
-
-		  <!-- post template -->
-
-		  <form ng-submit="addComment()"
-		    style="margin-top:30px;">
-		    <h3>Add a new comment</h3>
-
-		    <div class="form-group">
-		      <input type="text"
-		      class="form-control"
-		      placeholder="Comment"
-		      ng-model="body"></input>
-		    </div>
-		    <button type="submit" class="btn btn-primary">Post</button>
-		  </form>
-		</script>
 		<script type="text/ng-template" id="/oneRestaurant12.html">
 
 		  <!-- post template -->

@@ -6,11 +6,15 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-		<script src="/javascripts/angularApp.js"></script>
-
-		<link href="/stylesheets/style.css" rel="stylesheet">
-		
 		<script src="/javascripts/bootstrap-rating-input.min.js" type="text/javascript"></script>
+		<script src="/javascripts/angularApp.js"></script>
+		<script src="/javascripts/sweet-alert.js"></script>
+
+		
+		<link href="/stylesheets/style.css" rel="stylesheet">
+		<link href="/stylesheets/sweet-alert.css" rel="stylesheet">
+		<link href="/stylesheets/font-awesome.css" rel="stylesheet">
+		
 		
 		<style> .glyphicon-thumbs-up { cursor:pointer } </style>
 	</head>
@@ -36,11 +40,21 @@
 
 
 	</script>
-	<script src="http://connect.facebook.net/en_US/all.js"></script>
 
-	<div class="pull-right">
-		<fb:login-button max-rows="1" 
-		size="large" data-auto-logout-link="true" ></fb:login-button>
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
+	<div class="row-fluid pull-right">
+	  <div class="span4 offset4 text-center">
+	  	
+	  	
+		<form action="/login" class="pull-right" method="GET">
+			<input class="btn btn-default" type="submit" value="Login">
+		</form>
+		<form action="/signup" class="pull-right" method="GET">
+			<input class="btn btn-default" type="submit" value="Signup">
+		</form>
+		<br>
+		<fb:login-button size="large" data-auto-logout-link="true" class="pull-right"></fb:login-button>
+	  </div>
 	</div>
 
 
@@ -99,9 +113,13 @@
 		<!-- rest of template -->
 		
 		</script>
-		
-		
-
+		<script>
+		$(document).ready(function () {
+			setTimeout(function () {
+    		swal({title: 'Error!', text: 'Here\'s my error message!', type: 'error', confirmButtonText: 'Cool'});
+    	}, 1000);
+		});
+		</script>
 		<script type="text/ng-template" id="/oneRestaurant.html">
 		<form action="#/restaurants" method="GET">
 			<input class="btn btn-default" type="submit" value="Back to Restaurants">
@@ -114,6 +132,7 @@
 			</div>
 			
 		</div>
+
 		<div class="row-fluid">
   			<div class="col-md-4">
   			<table class="table table-hover table-bordered">
